@@ -1,0 +1,253 @@
+//color codes
+2     : #ffb3ff black
+4     :#ff33ff black
+8     :#e600e6 black
+16    :#bfff80
+32    :#80ff00
+64    :#59b300 black
+128   :#4d94ff white
+256   :#0066ff
+512   :#0047b3
+1024  :#ff3300
+2048  :#990000 white
+
+whole backgroundColor: #ccffcc
+border of board #ffcccc
+
+//app-redux
+
+import { createStore, applyMiddleware } from "redux";
+import reduxThuck from "redux-thunk";
+import { SWIPE_LEFT, SWIPE_UP, SWIPE_RIGHT, SWIPE_DOWN } from "./actions";
+
+//Inital state
+
+const intialState = {
+  board: [
+    ["", "2", "", ""],
+    ["2", "", "", ""],
+    ["", "", "2", ""],
+    ["", "", "", ""]
+  ]
+};
+
+//reducers
+
+const reducer = (state = intialState, action) => {
+  switch (action.type) {
+    case SWIPE_LEFT:
+      console.log("LEFT");
+      break;
+    // case SWIPE_UP:
+    //   console.log("UP");
+    //   break;
+    // case SWIPE_RIGHT:
+    //   console.log("RIGHT");
+    //   break;
+    // case SWIPE_DOWN:
+    //   console.log("DOWN");
+    //   break;
+
+    default:
+      return state;
+  }
+};
+
+const store = createStore(reducer, applyMiddleware(reduxThuck));
+
+export { store };
+
+
+//converted file of home.tsx
+
+import React, { Component } from "react";
+import { StyleSheet, Text, View, FlatList } from "react-native";
+import GestureRecognizer from "react-native-swipe-gestures";
+import { RouteProps } from "react-router";
+import { connect } from "react-redux";
+
+const mapStateToProps = state => {
+  return {
+    board: state.board
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+class Game extends Component<RouteProps> {
+  state = {
+    data: [
+      ["", "2", "", ""],
+      ["", "", "", ""],
+      ["", "", "2", ""],
+      ["", "", "", ""]
+    ]
+  };
+  render() {
+    // console.log(typeof this.props.matirxNumber);
+    // let grid = [
+    //   <Text key={1}>Hello {this.props.matirxNumber}!</Text>,
+    //   <Text key={2}>Hello {this.props.matirxNumber + "a" + 1}!</Text>
+    // ];
+    // console.log(this);
+    let row = [];
+    let col = [];
+
+    return (
+      <GestureRecognizer
+        onSwipeLeft={onSwipeLeft}
+        onSwipeUp={onSwipeUp}
+        onSwipeRight={onSwipeRight}
+        onSwipeDown={onSwipeDown}
+        config={{
+          velocityThreshold: 0.3,
+          directionalOffsetThreshold: 80
+        }}
+      >
+        <View style={styles.board}>
+          <FlatList
+            data={this.state.data}
+            contentContainerStyle={{ flexGrow: 1 }}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <View style={styles.row}>
+                <FlatList
+                  contentContainerStyle={{ flexGrow: 1 }}
+                  data={item}
+                  keyExtractor={(item, index) => index.toString()}
+                  // style={styles.col}
+                  horizontal={true}
+                  renderItem={({ item }) => (
+                    <View style={styles.col}>
+                      <Text style={styles.text}>{item}</Text>
+                    </View>
+                  )}
+                ></FlatList>
+              </View>
+            )}
+          ></FlatList>
+        </View>
+      </GestureRecognizer>
+    );
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff"
+  },
+  board: {
+    width: 325,
+    height: 325,
+    // top: -75,
+    borderColor: "red",
+    borderWidth: 2,
+    backgroundColor: "black"
+  },
+  row: {
+    borderBottomWidth: 1,
+    width: 350,
+    height: 80.2,
+    borderColor: "red",
+    flexDirection: "row"
+  },
+  col: {
+    width: 80.2,
+    // height: 8,
+    borderLeftWidth: 2,
+    borderLeftColor: "red",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#fff"
+  },
+  text: {
+    color: "red"
+  }
+});
+
+//Swip fucnitons
+const onSwipeLeft = () => {
+  alert("You Swiped left!");
+  change();
+};
+const onSwipeUp = () => {
+  alert("You Swiped Up!");
+};
+const onSwipeRight = () => {
+  alert("You Swiped Right!");
+};
+const onSwipeDown = () => {
+  alert("You Swiped Down!");
+};
+
+//functions
+function change() {}
+
+
+
+// full length code for board body
+
+
+        {/* <View style={styles.board}>
+          <View nativeID="1" style={styles.row}>
+            <View style={styles.col}>
+              <Text style={styles.text}>2</Text>
+            </View>
+            <View style={styles.col}>
+              <Text style={styles.text}>2</Text>
+            </View>
+            <View style={styles.col}>
+              <Text style={styles.text}>2</Text>
+            </View>
+            <View style={styles.col}>
+              <Text style={styles.text}>2</Text>
+            </View>
+          </View>
+          <View nativeID="2" style={styles.row}>
+            <View style={styles.col}>
+              <Text style={styles.text}>2</Text>
+            </View>
+            <View style={styles.col}>
+              <Text style={styles.text}>2</Text>
+            </View>
+            <View style={styles.col}>
+              <Text style={styles.text}>2</Text>
+            </View>
+            <View style={styles.col}>
+              <Text style={styles.text}>2</Text>
+            </View>
+          </View>
+          <View nativeID="3" style={styles.row}>
+            <View style={styles.col}>
+              <Text style={styles.text}>2</Text>
+            </View>
+            <View style={styles.col}>
+              <Text style={styles.text}>2</Text>
+            </View>
+            <View style={styles.col}>
+              <Text style={styles.text}>2</Text>
+            </View>
+            <View style={styles.col}>
+              <Text style={styles.text}>2</Text>
+            </View>
+          </View>
+          <View nativeID="4" style={styles.row}>
+            <View style={styles.col}>
+              <Text style={styles.text}>2</Text>
+            </View>
+            <View style={styles.col}>
+              <Text style={styles.text}>2</Text>
+            </View>
+            <View style={styles.col}>
+              <Text style={styles.text}>2</Text>
+            </View>
+            <View style={styles.col}>
+              <Text style={styles.text}>2</Text>
+            </View>
+          </View>
+        </View> */}
