@@ -11,6 +11,7 @@ import { store } from "../redux/app-redux";
 import { RouteProps } from "react-router";
 import { connect } from "react-redux";
 
+const GameIcon = require("./../assets/2048GameIconjpg.jpg");
 const resetIcon = require("./../assets/reset.png");
 const undoIcon = require("./../assets/undo.png");
 
@@ -32,7 +33,6 @@ class ScoreAndAction extends Component<RouteProps> {
     };
   }
   render() {
-    let { isGameOver } = this.state;
     return (
       <View>
         <View>
@@ -60,8 +60,12 @@ class ScoreAndAction extends Component<RouteProps> {
             </View>
           )}
         </View>
+        <View>
+          <Image source={GameIcon} style={styles.gameIcon}></Image>
+        </View>
         <View style={styles.scoreCardContainor}>
           <View style={styles.scoreCard}>
+            <Text style={styles.scoreHeading}>SCORE</Text>
             <Text style={styles.scoreText}>{store.getState().totalScore}</Text>
           </View>
           <TouchableOpacity activeOpacity={0.5} onPress={() => reset()}>
@@ -79,6 +83,11 @@ class ScoreAndAction extends Component<RouteProps> {
 export default connect(mapStateToProps, mapDispatchToProps)(ScoreAndAction);
 
 const styles = StyleSheet.create({
+  gameIcon: {
+    width: 310,
+    height: 150,
+    top: -50
+  },
   scoreCardContainor: {
     flex: 0,
     flexDirection: "row",
@@ -89,11 +98,21 @@ const styles = StyleSheet.create({
     height: 75,
     marginRight: 42,
     width: 125,
+    flex: 0,
     backgroundColor: "black"
+  },
+  scoreHeading: {
+    color: "yellow",
+    fontSize: 25,
+    paddingLeft: 20
   },
   scoreText: {
     color: "white",
-    backgroundColor: "red"
+    backgroundColor: "red",
+    fontSize: 25,
+    height: 40,
+    paddingTop: 5,
+    paddingLeft: 40
   },
   resetIcon: {
     height: 75,

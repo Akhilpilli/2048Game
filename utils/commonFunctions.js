@@ -50,7 +50,6 @@ export function rightCheckIsMoved(
   newBoard,
   callbackGenerateRandomNumber
 ) {
-  console.log(oldBoard, " right check");
   let copyReversOldBoard = [
     ["", "", "", ""],
     ["", "", "", ""],
@@ -70,7 +69,6 @@ export function checkIsMoved(oldBoard, newBoard, callbackGenerateRandomNumber) {
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
       if (oldBoard[i][j] != newBoard[i][j]) {
-        console.log(oldBoard[i][j], " ", newBoard[i][j], " changed");
         callbackGenerateRandomNumber(
           newBoard,
           [...rowElements],
@@ -114,7 +112,6 @@ export function resetAfterGameOver() {
 export function onCLickNoToggleGameOver() {
   const isGameOver = !store.getState().isGameOver;
   store.dispatch(toggleGameOver(isGameOver));
-  console.log(store.getState().isGameOver);
 }
 //checks
 export function isRowEmpty(rowIndex, board) {
