@@ -38,11 +38,9 @@ const reducer = (state = intialState, action) => {
     case UPDATE_SCORE:
       return { ...state, totalScore: action.score };
     case UPDATE_RANDOM_GENERATED_NUMBER:
-      console.log("RANDOM");
       return { ...state, board: action.board };
       break;
     case SWIPE_LEFT:
-      console.log("LEFT");
       return {
         ...state,
         board: action.board,
@@ -50,7 +48,6 @@ const reducer = (state = intialState, action) => {
       };
       break;
     case SWIPE_UP:
-      console.log("UP");
       return {
         ...state,
         board: action.board,
@@ -58,7 +55,6 @@ const reducer = (state = intialState, action) => {
       };
       break;
     case SWIPE_RIGHT:
-      console.log("RIGHT");
       return {
         ...state,
         board: action.board,
@@ -66,7 +62,6 @@ const reducer = (state = intialState, action) => {
       };
       break;
     case SWIPE_DOWN:
-      console.log("DOWN");
       return {
         ...state,
         board: action.board,
@@ -74,14 +69,11 @@ const reducer = (state = intialState, action) => {
       };
       break;
     case RESET_BOARD:
-      console.log("RESET");
       return { ...state, board: action.board };
       break;
     case UNDO:
-      console.log("UNDO");
       return { ...state, board: action.board };
     case TOGGLE_GAME_OVER:
-      console.log("TOGGLE_GAME_OVER");
       return { ...state, isGameOver: action.isGameOver };
     default:
       return state;
