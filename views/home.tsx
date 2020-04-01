@@ -19,6 +19,7 @@ import {
   isColEmpty,
   isGameOver
 } from "../utils/commonFunctions.js";
+import "react-native-gesture-handler";
 import { moveLeft, moveRight, moveUp, moveDown } from "../utils/moveFunctions";
 import { State, PanGestureHandler } from "react-native-gesture-handler";
 

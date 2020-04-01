@@ -133,22 +133,28 @@ const styles = StyleSheet.create({
   },
   gameOverHeading: {
     marginLeft: 130,
-    top: -112,
-    fontSize: 34
+    top: 36,
+    fontSize: 34,
+    textShadowColor: "red",
+    textShadowRadius: 1
   },
   confirmationsRow: {
     flex: 0,
     flexDirection: "row",
     marginLeft: 120,
-    top: -50
+    top: 150
   },
   yes: {
     fontSize: 20,
-    padding: 10
+    padding: 10,
+    textShadowColor: "red",
+    textShadowRadius: 1
   },
   no: {
     fontSize: 20,
     marginLeft: 82,
-    padding: 10
+    padding: 10,
+    textShadowColor: "red",
+    textShadowRadius: 1
   }
 });

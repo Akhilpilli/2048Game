@@ -12,36 +12,45 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 export function generateTwoRandomNumber(board) {
-  generateRandomNumber(board);
-  generateRandomNumber(board);
+  const rowElements = [0, 1, 2, 3];
+  generateRandomNumber(board, rowElements);
+  generateRandomNumber(board, rowElements);
 }
 //Exported Functions
 export function isGameOver() {
   const board = [...store.getState().board];
   //check if any empty blocks are there
   for (let i = 0; i < 4; i++)
-    for (let j = 0; j < 4; j++) if (board[i][j == ""]) return;
+    for (let j = 0; j < 4; j++) if (board[i][j] == "") return;
 
   for (let i = 0; i < 3; i++)
     for (let j = 0; j < 3; j++)
       if (board[i][j] == board[i + 1][j] || board[i][j] == board[i][j + 1])
         return;
 
-  console.log("Game Over");
+  for (let i = 0; i < 3; i++) {
+    if (board[3][i] == board[3][i + 1] || board[i][3] == board[i + 1][3])
+      return;
+  }
   store.dispatch(toggleGameOver(!store.getState().isGameOver));
 }
-export function generateRandomNumber(board) {
+export function generateRandomNumber(board, rowElements) {
   const itemsToSet = [2, 4];
-  const row = getRandomInt(4);
+  // const row = getRandomInt(4);
   const col = getRandomInt(4);
-  if (board[row][col] != "") {
-    setRandomNumber(board);
-  } else {
-    const numberTobeSet =
-      itemsToSet[Math.floor(Math.random() * itemsToSet.length)];
-    board[row][col] = numberTobeSet;
-    store.dispatch(setRandomNumber(board));
-  }
+  console.log(rowElements);
+  const rowIndex = getRandomInt(rowElements.length);
+  const row = rowElements[rowIndex];
+  rowElements.splice(rowIndex, 1);
+
+  // if (board[row][col] != "") {
+  //   setRandomNumber(board);
+  // } else {
+  const numberTobeSet =
+    itemsToSet[Math.floor(Math.random() * itemsToSet.length)];
+  board[row][col] = numberTobeSet;
+  store.dispatch(setRandomNumber(board));
+  // }
   totalScore();
 }
 //due to some bug using  this funciton rightCheckIsMoved

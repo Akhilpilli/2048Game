@@ -19,6 +19,7 @@
     "android": {
       "package": "com.AugmentedSports.yourappname",
       "versionCode": 1
-    }
+    },
+    "description": ""
   }
 }
